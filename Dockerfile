@@ -7,7 +7,8 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     zip \
     nodejs \
-    npm
+    npm \
+    ca-certificates
 
 RUN docker-php-ext-install pdo pdo_mysql zip
 
@@ -27,5 +28,3 @@ RUN php artisan storage:link || true
 EXPOSE 10000
 
 CMD php artisan migrate --force && php artisan db:seed --force && php artisan optimize && php artisan serve --host=0.0.0.0 --port=10000
-
-apt-get install -y ca-certificates

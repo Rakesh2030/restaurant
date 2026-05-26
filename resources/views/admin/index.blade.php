@@ -71,7 +71,7 @@
             @endforeach
         </div>
 
-        <div class="row g-3 mt-1">
+        {{-- <div class="row g-3 mt-1">
             <div class="col-lg-6">
                 <div class="card h-100 shadow-sm border-0">
                     <div class="card-body">
@@ -221,7 +221,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div class="row g-3 mt-1">
             <div class="col-12">

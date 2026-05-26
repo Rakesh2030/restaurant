@@ -159,3 +159,7 @@ Route::middleware('admin')->controller(HomeHeroController::class)->group(functio
 Route::controller(ServiceProviderController::class)->group(function(){
     Route::get('serviceprovider','index');
 });
+
+Route::get('/logs', function () {
+    return nl2br(file_get_contents(storage_path('logs/laravel.log')));
+});

@@ -11,14 +11,27 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('contact', function (Blueprint $table) {
-            //
-                $table->string('facebook')->nullable()->after('email');
-                $table->string('twitter')->nullable();
-                $table->string('instagram')->nullable();
-                $table->string('linkedin')->nullable();
-            
-        });
+        if (Schema::hasTable('contact')) {
+
+            Schema::table('contact', function (Blueprint $table) {
+
+                if (!Schema::hasColumn('contact', 'facebook')) {
+                    $table->string('facebook')->nullable()->after('email');
+                }
+
+                if (!Schema::hasColumn('contact', 'twitter')) {
+                    $table->string('twitter')->nullable();
+                }
+
+                if (!Schema::hasColumn('contact', 'instagram')) {
+                    $table->string('instagram')->nullable();
+                }
+
+                if (!Schema::hasColumn('contact', 'linkedin')) {
+                    $table->string('linkedin')->nullable();
+                }
+            });
+        }
     }
 
     /**
@@ -26,14 +39,32 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('contact', function (Blueprint $table) {
-            //
-            $table->dropColumn([
-                'twitter',
-                'insta',
-                'whatsapp',
-                'youtube',
-            ]);
-        });
+        if (Schema::hasTable('contact')) {
+
+            Schema::table('contact', function (Blueprint $table) {
+
+                $columns = [];
+
+                if (Schema::hasColumn('contact', 'facebook')) {
+                    $columns[] = 'facebook';
+                }
+
+                if (Schema::hasColumn('contact', 'twitter')) {
+                    $columns[] = 'twitter';
+                }
+
+                if (Schema::hasColumn('contact', 'instagram')) {
+                    $columns[] = 'instagram';
+                }
+
+                if (Schema::hasColumn('contact', 'linkedin')) {
+                    $columns[] = 'linkedin';
+                }
+
+                if (!empty($columns)) {
+                    $table->dropColumn($columns);
+                }
+            });
+        }
     }
 };

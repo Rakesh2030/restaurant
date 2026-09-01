@@ -9,18 +9,67 @@
 @endif
 
 <!-- Categories Start -->
+@php
+
+$categoryImages = [
+
+    'Vegetarian' => 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80',
+
+    'Non-Veg' => 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80',
+
+    'Seafood' => 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80',
+
+    'Bakery' => 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80',
+
+    'Street Food' => 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80',
+
+    'Healthy Food' => 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=600&q=80',
+
+    'Desserts' => 'https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=600&q=80',
+
+    'Drinks & Beverages' => 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=600&q=80',
+
+    'Italian' => 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80',
+
+    'Chinese' => 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=600&q=80',
+
+    'Indian Food' => 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=600&q=80',
+
+    'Fast Food' => 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80',
+
+];
+
+@endphp
+
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-4">
             @foreach($categories as $category)
+            @php
+                    $imageUrl = $categoryImages[$category->name] ?? null;
+                @endphp
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                     <a href="{{ route('frontend.pages.menu', ['category' => $category->name]) }}" class="text-dark">
                         <div class="service-item rounded pt-3">
                             <div class="p-4">
-                                @if($category->image)
+                                <!-- @if($category->image)
                                     <img src="{{ asset('storage/'.$category->image) }}" class="img-fluid rounded mb-3" style="height: 80px; object-fit: cover;" alt="img">
                                 @else
                                     <i class="fa fa-3x fa-utensils text-primary mb-4"></i>
+                                @endif -->
+                                 @if($imageUrl)
+
+                                    <img
+                                        src="{{ $imageUrl }}"
+                                        class="img-fluid rounded mb-3"
+                                        style="height: 80px; width: 100%; object-fit: cover;"
+                                        alt="{{ $category->name }}"
+                                    >
+
+                                @else
+
+                                    <i class="fa fa-3x fa-utensils text-primary mb-4"></i>
+
                                 @endif
                                 <h5>{{ $category->name }}</h5>
                                 <p>View all {{ $category->name }} foods.</p>

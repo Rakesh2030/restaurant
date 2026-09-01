@@ -18,7 +18,7 @@
                         <div class="service-item rounded pt-3">
                             <div class="p-4">
                                 @if($category->image)
-                                    <img src="{{ asset('storage/'.$category->image) }}" class="img-fluid rounded mb-3" style="height: 80px; object-fit: cover;" alt="">
+                                    <img src="{{ asset('storage/'.$category->image) }}" class="img-fluid rounded mb-3" style="height: 80px; object-fit: cover;" alt="img">
                                 @else
                                     <i class="fa fa-3x fa-utensils text-primary mb-4"></i>
                                 @endif

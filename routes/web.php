@@ -12,6 +12,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeHeroController;
 use App\Http\Controllers\ReservationFormController;
 use App\Http\Controllers\ServiceProviderController;
+use Illuminate\Support\Facades\File;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,24 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/gallery', 'gallery')->name('frontend.gallery');
     Route::get('/offers', 'offers')->name('frontend.offers');
     Route::get('/usersave', 'save')->name('frontend.page.save');
+});
+
+Route::get('/check-image', function () {
+
+    $filename = 'hQRpff2DiVAiwGjfX3i0wUelNdxw1coiq2lWcFns.jpg';
+
+    $storagePath = storage_path(
+        'app/public/categories/' . $filename
+    );
+
+    $publicPath = public_path(
+        'storage/categories/' . $filename
+    );
+
+    return [
+        'storage_file_exists' => File::exists($storagePath),
+        'public_file_exists' => File::exists($publicPath),
+    ];
 });
 
 Route::controller(CartController::class)->group(function () {
